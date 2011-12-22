@@ -4,7 +4,7 @@ module Stinger
 
     def self.options
       {
-        :url => 'https://ems.premiercellar.com/api/xmlrpc/index.php'
+        :url => 'http://echo.bluehornet.com/api/xmlrpc/index.php'
       }
     end
 
