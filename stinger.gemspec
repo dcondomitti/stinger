@@ -8,6 +8,8 @@ Gem::Specification.new do |s|
   s.description = "Stinger provides an easy to use API wrapper for interaction with Blue Hornet's Email Marketing Service API."
   s.email = "git@danielgreenlaw.com"
 
+  s.add_dependency 'httparty'
+
   s.files = [
     "VERSION",
     "stinger.gemspec",
