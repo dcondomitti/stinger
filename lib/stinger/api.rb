@@ -4,12 +4,15 @@ module Stinger
 
     def self.options
       {
-        :url => 'http://echo.bluehornet.com/api/xmlrpc/index.php'
+        :url => 'http://echo.bluehornet.com/api/xmlrpc/index.php',
+        :credentials => {}
       }
     end
 
     def initialize(options = {})
       @options = options.reverse_merge(self.class.options)
+
+      raise 'API Key and Shared Secret are required to make connection.' unless @options[:credentials].key?(:api_key) && @options[:credentials].key?(:shared_secret)
     end
 
     def execute(method, data)
@@ -33,13 +36,11 @@ module Stinger
 
     private
       def build_xml(method, data)
-        require 'builder'
-
         xml = Builder::XmlMarkup.new
         xml.api {
           xml.authentication {
-            xml.api_key options[:brand].blue_hornet_api_key
-            xml.shared_secret options[:brand].blue_hornet_shared_secret
+            xml.api_key options[:credentials].api_key
+            xml.shared_secret options[:credentials].shared_secret
             xml.response_type 'xml'
           }
           xml.data {
