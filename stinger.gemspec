@@ -12,7 +12,8 @@ Gem::Specification.new do |s|
     "VERSION",
     "stinger.gemspec",
     "init.rb",
-    "lib/api.rb",
+    "lib/stinger.rb",
+    "lib/stinger/api.rb",
     "rails/init.rb"
   ]
   s.require_path = "lib"
