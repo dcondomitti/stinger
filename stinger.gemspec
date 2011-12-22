@@ -9,8 +9,6 @@ Gem::Specification.new do |s|
   s.email = "git@danielgreenlaw.com"
 
   s.files = [
-    "README.md",
-    "Rakefile",
     "VERSION",
     "stinger.gemspec",
     "init.rb",
