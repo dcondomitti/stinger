@@ -10,6 +10,14 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'httparty'
 
-  s.files = `git ls-files`.split("\n")
+  s.files = [
+    "VERSION",
+    "stinger.gemspec",
+    "lib/stinger.rb",
+    "lib/stinger/api.rb",
+    "lib/stinger/hash.rb",
+    "lib/stinger/subscriber.rb",
+    "lib/stinger/transactional_message.rb"
+  ]
   s.require_path = "lib"
 end
