@@ -4,7 +4,7 @@ module Stinger
 
     def self.options
       {
-        :url => 'http://echo.bluehornet.com/api/xmlrpc/index.php',
+        :url => 'https://echo.bluehornet.com/api/xmlrpc/index.php',
         :credentials => {}
       }
     end
@@ -20,27 +20,27 @@ module Stinger
       handle_response(request)
     end
 
-    def handle_response(response)
-      body = Hash.from_xml(response.body).recursive_symbolize_keys!.fetch(:methodResponse, {}).fetch(:item, nil)
-      # Handle all the bad things
-      errors = []
-      errors.push 'API request failed.' unless response.code.to_i == 200 && !body.nil?
-      errors.push 'Can currently handle only one response at a time.' if body.is_a? Array
-      errors.push body[:responseText] if body[:error].to_i == 1
-      return {:error => errors.join("\n\n")} if errors.any?
-
-      # Ah, and now for the good things
-      body[:responseText] = body[:responseText].fetch(:item, []).join(', ') if body[:responseText].is_a? Hash
-      return {:data => body[:responseData], :success => body[:responseText]}
-    end
-
     private
+      def handle_response(response)
+        body = Hash.from_xml(response.body).recursive_symbolize_keys!.fetch(:methodResponse, {}).fetch(:item, nil)
+        # Handle all the bad things
+        errors = []
+        errors.push 'API request failed.' unless response.code.to_i == 200 && !body.nil?
+        errors.push 'Can currently handle only one response at a time.' if body.is_a? Array
+        errors.push body[:responseText] if body[:error].to_i == 1
+        return {:error => errors.join("\n\n")} if errors.any?
+
+        # Ah, and now for the good things
+        body[:responseText] = body[:responseText].fetch(:item, []).join(', ') if body[:responseText].is_a? Hash
+        return {:data => body[:responseData], :success => body[:responseText]}
+      end
+
       def build_xml(method, data)
         xml = Builder::XmlMarkup.new
         xml.api {
           xml.authentication {
-            xml.api_key options[:credentials].api_key
-            xml.shared_secret options[:credentials].shared_secret
+            xml.api_key options[:credentials][:api_key]
+            xml.shared_secret options[:credentials][:shared_secret]
             xml.response_type 'xml'
           }
           xml.data {
