@@ -8,7 +8,16 @@ module Stinger
     end
 
     def add(subscriber)
-      api.execute('legacy.manage_subscriber', subscriber)
+      @result = api.execute('legacy.manage_subscriber', subscriber)
+    end
+
+    def success?
+      !@result[:error] && [1,2].include?(@result.fetch(:data, {})[:status].to_i)
+    end
+
+    def error
+      return @result[:error] if @result.key?(:error)
+      success? ? nil : @result[:data][:message]
     end
   end
 end
