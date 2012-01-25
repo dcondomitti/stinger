@@ -14,10 +14,12 @@ module Stinger
       message_id = args.first.to_i if args.length==1 && !args.first.to_i.zero?
 
       unless message_id
-        api.execute('legacy.message_stats', options)
+        response = api.execute('legacy.message_stats', options)
       else
-        api.execute('legacy.message_stats', {:mess_id => message_id})
+        response = api.execute('legacy.message_stats', {:mess_id => message_id})
       end
+
+      [response[:data][:message_data][:message]].flatten
     end
   end
 end
