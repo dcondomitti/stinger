@@ -17,6 +17,7 @@ Gem::Specification.new do |s|
     "lib/stinger.rb",
     "lib/stinger/api.rb",
     "lib/stinger/message.rb",
+    "lib/stinger/methods.rb",
     "lib/stinger/subscriber.rb",
     "lib/stinger/transactional_message.rb"
   ]
