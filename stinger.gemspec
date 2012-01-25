@@ -16,6 +16,7 @@ Gem::Specification.new do |s|
     "lib/core_ext/hash.rb",
     "lib/stinger.rb",
     "lib/stinger/api.rb",
+    "lib/stinger/message.rb",
     "lib/stinger/subscriber.rb",
     "lib/stinger/transactional_message.rb"
   ]

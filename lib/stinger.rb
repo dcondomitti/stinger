@@ -1,4 +1,5 @@
 require 'builder'
+require 'httparty'
 require 'core_ext/hash'
 
 module Stinger
