@@ -6,6 +6,7 @@ module Stinger
 end
 
 require 'stinger/api'
-require 'stinger/message.rb'
-require 'stinger/subscriber.rb'
-require 'stinger/transactional_message.rb'
+require 'stinger/message'
+require 'stinger/methods'
+require 'stinger/subscriber'
+require 'stinger/transactional_message'

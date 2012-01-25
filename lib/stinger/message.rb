@@ -9,6 +9,8 @@ module Stinger
 
     def metrics(*args)
       options = args.extract_options!.delete_if{|k,v| ![:start_date, :end_date, :date, :last].include?(k) }
+      options = Stinger::Methods.parse_date_options(options)
+
       message_id = args.first.to_i if args.length==1 && !args.first.to_i.zero?
 
       unless message_id
